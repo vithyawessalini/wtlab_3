@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
     <title>Document</title>
     <style>
         .div1 {
@@ -17,6 +18,7 @@
           margin: auto;
           padding: 10px;
           font-family:Avanta Garde;
+          font-size: large;
         }
         body{
         background-image: url('https://media.cnn.com/api/v1/images/stellar/prod/220429130053-01-camp-tawonga-restricted.jpg?c=original');
@@ -25,70 +27,24 @@
         height: 100%;
         width: 100%;
         }
-        .ab{
-            display: flex;
-            justify-content:center;
-        }
         </style>
         </head>
         <body>
-            
-               <script>               
-                function Validate()
-        {
-        
-          var fname=document.f1.fname.value;
-          var lname=document.f1.lname.value;
-          var gm=document.f1.male.value;
-          var gf=document.f1.female.value;
-           var ph=document.f1.pn.value;
-           var gm=document.f1.male.value;
-           var d=document.f1.dec.value;
-           var e=document.f1.email.value      
-        var errors = [];
-               
-               if(lname=="") 
-                    errors[errors.length]= "Fill the Last Name ";
-               if(fname=="")
-                    errors[errors.length]= "Fill the First Name";
-               if(fname!=""&&lname!=""){
-                  if(fname==lname)
-                    errors[errors.length]= "First-Name and Last-Name must be different"; 
-               if(ph.length<10||ph.length>10)
-                    errors[errors.length]= "Phone number length should be 10";
-                    if(document.f1.dec.checked==0)
-                errors[errors.length]= "please agree the terms and condition";
-                var pat=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                if(email.value.match(pat))
-                    true
-                else
-                    errors[errors.length]= "Fill correct Email";            
-        }
-        if (errors.length > 0) 
-              reportErrors(errors);
-              
-        else{
-               alert("Form submitted successfully")
-        }          
-        function reportErrors(errors){
-         for (var i = 0; i<errors.length; i++) {
-          var numError = i + 1;
-          msg = errors[i];
-         }
-         alert(msg); 
-         
-        }}     
-        </script>
-        <form name="f1" onsubmit="Validate()">
+        <form name="f1"onsubmit="validate()">
         <div class="div1">
         <fieldset>
-        <legend><b>PARTICIPANT DETAILS</legend>
+        <legend><b>PARTICIPANT DETAILS</b></legend>
         <fieldset>
-        <legend>Personal Details</legend>
+        <legend><b>PERSONAL DETAILS</b></legend>
+        CAMP NO:
+        <input type="text" id="cmp"value="23CMP600" disabled><br><br>
         <label for="fname">First name:</label>
-        <input type="text" id="fname" placeholder="Enter first name"name="fname"pattern=[a-zA-Z]{3,} AUTOFOCUS ><br><br>
+        <input type="text" id="fname" placeholder="Enter first name"name="fname"pattern=[a-zA-Z]{3,} required ><br><br>
         <label for="lname">Last name:</label>
         <input type="text" id="lname" placeholder="Enter last name"name="lname"pattern=[a-zA-Z]{2} AUTOFOCUS ><br><br>
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" placeholder="Enter password"name="pass" AUTOFOCUS ><br><br>
+        
         <label for="birthday">Birthday:</label>
         <input type="date" id="birthday"name="bd"><br><br>
         <label for="gender">Gender:</label>
@@ -102,10 +58,10 @@
         <input type="radio" id="nightcamp" value="nightcamp"name="daycamp">
         <label for="nightcamp">Nightcamp</label><br><br>
         <label for="age">Age</label>
-        <input type="number" id="age" name="age" placeholder="Enter your age"><br>
+        <input type="number" id="age" name="age" placeholder="Enter your age" min="5" max="50"><br>
         </fieldset><br>
         <fieldset>
-        <legend>PARENTS/GAURDIAN DETAILS</legend>
+        <legend><b>PARENTS/GAURDIAN DETAILS</b></legend>
         <label for="name">Name:</label>
         <input type="text" id="name" placeholder="Parent/guardian name"name="fnam" pattern=[a-zA-Z]{3,} AUTOFOCUS><br><br>
         <label for ="email">Email:</label>
@@ -114,18 +70,92 @@
         <input type="text"value="+91"size="1"disabled>
         <input type="tel" placeholder="123-456-7890" name="pn"><br><br>
         <label for="address">Address :</label><br>
-        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<textarea name="message" rows="3" cols="20" placeholder="Enter your address"></textarea><br><br>
+        &emsp;&emsp;&emsp;&emsp;<textarea name="message" rows="3" cols="20" placeholder="Enter your address"></textarea><br><br>
         <label for="pin">Pin Code :</label>
         <input type="text" id="pin" name="pin" placeholder="Enter your pin code" ><br>
         </fieldset><br>
-        <input type="checkbox" name="dec">Agree terms and condition</input><br><br>
-        <div class="ab">
-        <input type="submit" name="submit" value="Submit"style="width:30%;height:25%;font-family:inkfree;font-size:25px;"></div>
-        </div>
+        <input type="checkbox" name="dec" id="dec"><b>Agree terms and condition</b></input><br><br>
+        <button type="submit"onclick="Validate()" id="submit"style="width:30%;height:25%;font-family:inkfree;font-size:25px">Submit</button></div>
         <br>
         <br>
         </fieldset>
         </form>
+        <script>               
+          function Validate()
+  {
+    event.preventDefault();
+    var fname=document.f1.fname.value;
+    var lname=document.f1.lname.value;
+    var gm=document.f1.male.value;
+    var gf=document.f1.female.value;
+     var ph=document.f1.pn.value;
+     var gm=document.f1.male.value;
+     var d=document.f1.dec.value;
+     var e=document.f1.email.value ;     
+  var errors = [];
+         
+         if(lname=="") 
+              errors[errors.length]= "Fill the Last Name ";
+         if(fname=="")
+              errors[errors.length]= "Fill the First Name";
+         if(fname!=""&&lname!=""){
+            if(fname==lname)
+              errors[errors.length]= "First-Name and Last-Name must be different"; 
+         if(ph.length<10||ph.length>10)
+              errors[errors.length]= "Phone number length should be 10";
+              if(document.f1.dec.checked==0)
+          errors[errors.length]= "please agree the terms and condition";
+          var pat=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          if(email.value.match(pat))
+              true
+          else
+              errors[errors.length]= "Fill correct Email";            
+  }
+  function generateRandomNumber() {
+			let min = 1;
+			let max = 1000000;
+			let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+			return randomNumber;
+		}
+
+		let randomNumber = generateRandomNumber();
+    
+    let ran=" Your ID is "+randomNumber;
+    
+  if (errors.length > 0) 
+       
+        reportErrors(errors);
         
+  else{
+    new swal({
+      title: 'Success!',
+      html:"Your form has been submitted successfully<br>"+ran,
+      icon: 'success',
+      footer: '<a href="dayinfo.html"style="text-decoration:none"> Day camp  .</a>'+'<a href="nitinfo.html"style="text-decoration:none">..   Night camp</a>',
+      
+    });
+    var allInputs = document.querySelectorAll('input');
+    var b=document.querySelectorAll('textarea');
+        b.forEach(singleInput => singleInput.value = '');
+         allInputs.forEach(singleInput => singleInput.value = '');
+         document.getElementById("daycamp").checked = false;
+document.getElementById("nightcamp").checked = false;
+document.getElementById("male").checked = false;
+document.getElementById("female").checked = false;
+document.getElementById("dec").checked = false;
+  }          
+  function reportErrors(errors){
+   for (var i = 0; i<errors.length; i++) {
+    var numError = i + 1;
+    msg = errors[i];
+   }
+   new swal({
+      title: 'Oops!',
+      text: msg,
+      icon: 'error',
+    });
+   
+  }}     
+  </script>
 </body>
 </html>
